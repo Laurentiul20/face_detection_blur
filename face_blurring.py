@@ -93,20 +93,23 @@ def vid_processing(path):
     while True:
         # get the next frame, resize it, and convert it to grayscale
         succes, frame = video_cap.read()
-        frame = cv2.resize(frame, (640, 640))
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        if succes:
+            frame = cv2.resize(frame, (300, 300))
+            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-        face_rects = face_detector.detectMultiScale(
-            gray, 1.04, 5, minSize=(30, 30))
+            face_rects = face_detector.detectMultiScale(
+                gray, 1.05, 6, minSize=(30, 30))
 
-        for (x, y, w, h) in face_rects:
-            # Select only detected face portion for Blur
-            face_color = frame[y:y + h, x:x + w]
-            # Blur the Face with Gaussian Blur of Kernel Size 51*51
-            blur = custom_gaussian_blur(face_color, 15)
-            frame[y:y + h, x:x + w] = blur
+            for (x, y, w, h) in face_rects:
+                # Select only detected face portion for Blur
+                face_color = frame[y:y + h, x:x + w]
+                # Blur the Face with Gaussian Blur of Kernel
+                blur = custom_gaussian_blur(face_color, 5)
+                frame[y:y + h, x:x + w] = blur
 
-        cv2.imshow("frame", frame)
+            cv2.imshow("frame", frame)
+        else:
+            break
         # wait for 1 milliseconde and if the q key is pressed, we break the loop
         if cv2.waitKey(1) == ord("q"):
             break
