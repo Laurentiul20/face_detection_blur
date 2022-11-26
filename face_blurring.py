@@ -98,7 +98,7 @@ def vid_processing(path):
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
             face_rects = face_detector.detectMultiScale(
-                gray, 1.05, 6, minSize=(30, 30))
+                gray, 1.02, 5, minSize=(30, 30))
 
             for (x, y, w, h) in face_rects:
                 # Select only detected face portion for Blur
