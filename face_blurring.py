@@ -81,7 +81,14 @@ def img_processing(path):
         output = custom_gaussian_blur(face_roi, 15)
         image[y:y+h, x:x+w] = output
 
-    cv2.imshow("Image", image)
+    scale_percent = 60 # percent of original size
+    width = int(image.shape[1] * scale_percent / 100)
+    height = int(image.shape[0] * scale_percent / 100)
+    dim = (width, height)
+  
+    # resize image
+    resized = cv2.resize(image, dim, interpolation = cv2.INTER_AREA)
+    cv2.imshow("Image", resized)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
