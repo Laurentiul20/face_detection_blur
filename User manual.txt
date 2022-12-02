@@ -1,0 +1,7 @@
+Pass the file path as command line parameter. For example, if an image file called test_img.jpeg exists in input_files folder, then run the following command to run the program:
+
+python face_blurring.py input_files/test_img.jpeg
+
+For video files, if the file is called video1.webm exists in input_files folder, then run the following command to run the program:
+
+python face_blurring.py input_files/video1.webm
